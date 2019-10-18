@@ -34,8 +34,8 @@ export default class AsyncComponentProvider extends Component {
     }).isRequired,
   }
 
-  constructor(props) {
-    super(props)
+  constructor(props, context) {
+    super(props, context)
     this.asyncContext = props.asyncContext || createAsyncContext()
     this.rehydrateState = props.rehydrateState
   }

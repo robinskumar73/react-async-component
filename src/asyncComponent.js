@@ -102,8 +102,8 @@ export default function asyncComponent(config) {
       }
     }
 
-    constructor(props) {
-      super(props)
+    constructor(props, context) {
+      super(props, context)
       if (this.context.asyncComponents != null) {
         state.asyncComponents = this.context.asyncComponents
         state.asyncComponentsAncestor = this.context.asyncComponentsAncestor
