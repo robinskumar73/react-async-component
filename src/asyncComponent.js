@@ -20,7 +20,9 @@ export default function asyncComponent(config) {
   const env =
     ['node', 'browser'].indexOf(config.env) > -1
       ? config.env
-      : typeof window === 'undefined' ? 'node' : 'browser'
+      : typeof window === 'undefined'
+      ? 'node'
+      : 'browser'
 
   const state = {
     // A unique id we will assign to our async component which is especially
@@ -100,7 +102,8 @@ export default function asyncComponent(config) {
       }
     }
 
-    componentWillMount() {
+    constructor(props) {
+      super(props)
       if (this.context.asyncComponents != null) {
         state.asyncComponents = this.context.asyncComponents
         state.asyncComponentsAncestor = this.context.asyncComponentsAncestor
@@ -113,8 +116,8 @@ export default function asyncComponent(config) {
     // react-async-bootstrapper
     bootstrap() {
       const doResolve = () =>
-        this.resolveModule().then(
-          module => (module === undefined ? false : undefined),
+        this.resolveModule().then(module =>
+          module === undefined ? false : undefined,
         )
 
       // browser
